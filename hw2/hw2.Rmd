@@ -2,8 +2,8 @@
 title: "HW 2: Visualization, Base R"
 subtitle: "Data 180, Professor Kennedy"
 author: 
-  name: "XXXX"
-  email: "XXXX@dickinson.edu"
+  name: "Sanskriti Rijal"
+  email: "rijals@dickinson.edu"
 date: '`r format(Sys.Date(), "%B %d, %Y")`' # no need to change date since this line grabs today's date
 output: 
   html_document
@@ -36,11 +36,27 @@ head(Cars93)
 # Base R
 ## Task 1
 a) Create a Frequency table and Relative Frequency table (latter uses percentages) for the variable `Type`. Make sure to round all digits to 3 digits.
-```{r}
-
+```{r} 
+library(MASS)
+data(Cars93)
+F_table <- table(Cars93$Type)
+rel_table <- prop.table(F_table) * 100
+rel_table <- round(rel_table,3)
+print(F_table)
+print(rel_table)
 ```
+
 b) Create a frequency bar graph for the variable `Type`. You can have count on the y axis.
 ```{r}
+library(MASS)
+library(ggplot2)
+data(Cars93)
+
+f_table <- table(Cars93$Type)
+
+colors <- rainbow(length(f_table))
+barplot(f_table, col=colors, names.arg= names(f_table), xlab = "Car type", ylab = "Count", main = "Frequence Bar Grpah for Car Types", cex.names = 1.2, cex.lab = 1.2, cex.axis=1.2)
+
 
 ```
 
@@ -51,6 +67,11 @@ b) Create a frequency bar graph for the variable `Type`. You can have count on t
 
 c) Create a pie chart of the variable `Type`.
 ```{r}
+library(MASS)
+data(Cars93)
+f_table <- table(Cars93$Type)
+piechart <- pie(f_table, labels= paste(names(f_table), "(", f_table, ")", sep=""), main = "Pie Chart of Car Types", cex = 1.2)
+print(piechart)
 
 ```
 
@@ -58,12 +79,16 @@ c) Create a pie chart of the variable `Type`.
 *	The names, labels, and axes sizes (cex parameter) should be set to 1.2
 
 d) What is the mode of the variable `Type`? Comment.
-
+The mode is midsize with the frequency of 22.
 
 ## Task 2 
 a) Create a histogram of the variable `Horsepower`.
 ```{r}
-
+library(MASS)
+data(Cars93)
+histogram <- hist(Cars93$Horsepower, col="lightpink",xlab="Horsepower", ylab="Frequency", main= "Histogram of Horsepower", cex.axis=1.2, cex.lab=1.2, cex.names=1.2)
+grid()
+print(histogram)
 ```
 
 *	Your axes should be labeled
@@ -73,42 +98,62 @@ a) Create a histogram of the variable `Horsepower`.
 
 b) Create a second histogram with breaks at 25 HP increments instead of 50.
 ```{r}
-
+library(MASS)
+data(Cars93)
+breaks_ <- seq(0, max(Cars93$Horsepower)+25, by=25)
+histogram <- hist(Cars93$Horsepower, breaks= breaks_, col="lightpink", xlab="Horsepower", ylab="Frequency", main="Histogram of Horsepower- 25 HP Increment", cex.axis = 1.2, cex.lab= 1.2, ces.names= 1.2)
+grid()
+print(histogram)
 ```
 
 * Use the breaks argument to define the classes
 * Other setting should be as in part (a)
 
 c) Which histogram more closely follows or rule of thumb for the suggested number of classes? Explain.
-```{r}
 
-```
+The second histogram with 25 HP increments aligns more closely to the rule of thumb for the suggested number of classses as it has more bins bringing it closer to the recommended range and provides a better representation of the distribution. 
+
 
 
 ## Task 3 
 a) What is the type of variable `Passengers`? (Categorical nominal/ordinal or Numerical discrete/continuous?) What happens if we were to make a histogram for `Passengers`? What is the problem with this graph?
-```{r}
-
-```
+The variable 'Passengers' is categorical nominal because each value represents the number of passengers a car model can seat. Since histograms show the distribution of numerical data, either discrete or continuous, the categorical nominal variable is not an appropriate choice because there is no numberical relationship between these categories. Instead, a bar graph or pie chart would be a better option to visualize the frequency.  
 
 b) Correct the problem in part (a) by creating a more appropriate visualization. Make sure to label your axes, place a title, choose a custom color as in the previous graphs. (Bonus: use factor() with levels option to display x axis values with no observations on the plot.)
 ```{r}
+library(MASS)
+data(Cars93)
+passengers <- factor(Cars93$Passengers, levels = 1:6)
+passenger_count <-table(passengers)
+colors <- "lightblue"
+barplot(passenger_count, col=colors, xlab="Number of Passengers", ylab="Frequency", main="Bar Chart of Passenger Counts", names.arg=levels(passengers), cex.axis=1.2, cex.lab=1.2, cex.names=1.2)
+grid()
 
 ```
 
 ## Task 4 
 a) Make a histogram of the variable `Length` (the default breaks are fine). Other aspects of the plot should be as in part (a) in Task 2.
 ```{r}
-
+library(MASS)
+data(Cars93)
+histogram_len <- hist(Cars93$Length, col="lightgreen", xlab="Length", ylab="Frequency", main="Histogram of Car Length", cex.axis=1.2, cex.lab= 1.2, cex.names=1.2)
+grid()
+print(histogram_len)
 ```
 
 b) What is the shape of the distribution?
-
+The shape of the distribution is aproximately bell shaped since it has a peak at the center and distribution of both sides of the peak. 
 
 c) Find the mean and median of the variable `Length.` Do these answers meet your expectations from part (b)?
 ```{r}
-
+library(MASS)
+data(Cars93)
+mean_len <- mean(Cars93$Length)
+median_len <- median(Cars93$Length)
+print(mean_len)
+print(median_len)
 ```
+Yes these answers meet my expetation as the mean is 183.2043 and the median is 183 which is roughly similar to each other and both are located at the center of the distribution.
 
 You are done! 🏁 Don't forget to commit and push your .Rmd file to your Github repository before the due date.
 
