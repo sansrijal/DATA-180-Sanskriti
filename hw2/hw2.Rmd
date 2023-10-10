@@ -8,6 +8,7 @@ date: '`r format(Sys.Date(), "%B %d, %Y")`' # no need to change date since this 
 output: 
   html_document
 ---
+20/20.Good job.  
 
 Make sure that you have accepted the hw invitation link, and working with your clone repository.
 
@@ -111,9 +112,9 @@ print(histogram)
 
 c) Which histogram more closely follows or rule of thumb for the suggested number of classes? Explain.
 
-The second histogram with 25 HP increments aligns more closely to the rule of thumb for the suggested number of classses as it has more bins bringing it closer to the recommended range and provides a better representation of the distribution. 
+The second histogram with 25 HP increments aligns more closely to the rule of thumb for the suggested number of classes as it has more bins bringing it closer to the recommended range and provides a better representation of the distribution. 
 
-
+sqrt{n}
 
 ## Task 3 
 a) What is the type of variable `Passengers`? (Categorical nominal/ordinal or Numerical discrete/continuous?) What happens if we were to make a histogram for `Passengers`? What is the problem with this graph?
