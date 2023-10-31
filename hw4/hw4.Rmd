@@ -8,6 +8,7 @@ date: '`r format(Sys.Date(), "%B %d, %Y")`'
 output: 
   html_document
 ---
+17/20.
 
 **Due date:** October 26 beginning of class.
 
@@ -105,6 +106,7 @@ avg
 Continuing with your results in Question 6: Do you notice a trend across years? Are the record times getting faster, slower, or no clear pattern in time? Create a barplot where each year appears on the x axis (you can treat year as a categorical variable in this case) and y axis showing the mean record time in each year. Interpret your graph. *Hint: Use your code in Question 6, which returns the average record times by year, followed by ` %>% ggplot(aes(year,mean)) + geom_bar(stat='identity')` Hint2: To make your figure wider, you can insert fig.width=10 inside the curly brackets at the beginning of your r code chunk below, as {r, fig.width=10} which I already did for you below,*
 
 ```{r, fig.width=10}
+
 library(ggplot2)
 avg <- records %>%
   group_by(year) %>%
@@ -112,6 +114,7 @@ avg <- records %>%
 avg %>%
   ggplot(aes(year, meanTime)) + geom_bar(stat="identity") + 
   labs(x = "year", y= "Mean Record Time") + ggtitle("Mean Record Time by Year") + ggtitle("Mean Record Time by Year") + theme_minimal()
+# Do you notice a trend across years? Are the record times getting faster, slower, or no clear pattern in time? (-2)
 
 ```
 
@@ -126,7 +129,7 @@ library(ggplot2)
 records %>%
   ggplot(aes(time,fill=type)) + geom_histogram(alpha=0.5, bins=30) + labs(x="Time", y="Frequency") + ggtitle("Distribution of Record Times by Type") + scale_fill_manual(values=c("Single Lap"="blue", "Three Lap"="red")) + theme_minimal()
 
-
+# How do record times compare between Single Lap and Three Lap tracks? (-1)
 ```
 
 # Question 9
