@@ -8,7 +8,7 @@ date: '`r format(Sys.Date(), "%B %d, %Y")`'
 output: 
   html_document
 ---
-
+19/20. Good job. 
 **Due date:** November 2 beginning of class.
 
 # Question 1
@@ -137,6 +137,8 @@ Fatherest neighbor = 9,0
 c) Average-neighbor
 Average neighbor = 4.1
 
+#Show by hand (-1)
+
 # Question 4
 Consider the following dendrogram created by a hierarchical clustering of 11 frequently used English words.
 
@@ -166,7 +168,8 @@ Let's practice hierarchical clustering with the `vertebrate` dataset that is sav
 
 a) First, read in the `vertebrate.csv` file and store it in a dataframe object named `vertebrate`. How many rows does the dataframe have? Print the entire dataset in your solutions.
 ```{r}
-vertebrate <- read.csv("/Users/sanskriti/Desktop/DATA-180-Sanskriti/hw5/vertebrate.csv")
+#vertebrate <- read.csv("/Users/sanskriti/Desktop/DATA-180-Sanskriti/hw5/vertebrate.csv")
+vertebrate <- read.csv ("C:/Users/rodge/Downloads/vertebrate.csv")
 rows <- nrow(vertebrate)
 print(vertebrate)
 print(rows)
@@ -176,7 +179,8 @@ b) Perform two separate clustering analyses of the data using the `hclust` funct
 
 (i)	using the Euclidean metric with complete linkage. Note: Similar to Question 2, start by creating a distance matrix named `vertebrate_euclidean` which should not include any text column. Add row and column names to the matrix from the `vertebrate` dataframe. Then apply `dist()` once again before feeding the matrix into `hclust()` function.
 ```{r}
-vertebrate <- read.csv("/Users/sanskriti/Desktop/DATA-180-Sanskriti/hw5/vertebrate.csv")
+#vertebrate <- read.csv("/Users/sanskriti/Desktop/DATA-180-Sanskriti/hw5/vertebrate.csv")
+vertebrate <- read.csv ("C:/Users/rodge/Downloads/vertebrate.csv")
 vertNum <- vertebrate[,-1]
 Ver_Euclidean<-as.matrix(dist(vertNum, method= "euclidean"))
 
@@ -187,7 +191,8 @@ plot(hclust_euclidean,main = "Clustured vertebrates, Euclidean Metric, Complete 
 
 (ii)using the Manhattan metric with single linkage and
 ```{r}
-vertebrate <- read.csv("/Users/sanskriti/Desktop/DATA-180-Sanskriti/hw5/vertebrate.csv")
+#vertebrate <- read.csv("/Users/sanskriti/Desktop/DATA-180-Sanskriti/hw5/vertebrate.csv")
+vertebrate <- read.csv ("C:/Users/rodge/Downloads/vertebrate.csv")
 vertNum <- vertebrate[,-1]
 vertebrate_manhattan <- as.matrix(dist(vertNum, method = "manhattan"))
 hclust_manhattan <- hclust(as.dist(vertebrate_manhattan), method = "single")
