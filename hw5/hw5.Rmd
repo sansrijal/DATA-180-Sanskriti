@@ -105,7 +105,11 @@ Ver_Euclidean<-as.matrix(dist(vertebrate[,-1]))
 ```
 
 Which method do you prefer?
+<<<<<<< Updated upstream
 
+=======
+I prefer the euclidean method for this data set as it forms well separated clustures. 
+>>>>>>> Stashed changes
 
 In your dendrograms:
 
