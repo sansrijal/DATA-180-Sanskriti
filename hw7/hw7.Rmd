@@ -246,7 +246,8 @@ topWords %>%
   scale_y_reordered()
   
 ```
-
+Topic one has the highest beta for the word 'man' with a value of almost 0.008. Other top words inclue 'nsw' with a value greater than 0.004 and fire with a value of 0.004. This topic seems to be about a fire in New South Wales. 
+For topic three the top words with their beta values respectively are 'man' with greater than 0.006, 'murder' with 0.006, 'face' and 'Australian'with a value slightly less than 0.006. This topic could be related to muders in Australia.
 # Question 16
 Plot gammas of top 5 documents with highest gamma for each 8 topic. Return the contents of the 5 documents with highest gamma only for topics 1 and 2. Does it makes sense that these documents are assigned to topics 1 and 2 accordingly? Comment.
 ```{r}
