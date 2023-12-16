@@ -1,0 +1,155 @@
+---
+title: "Final project"
+output: html_document
+name : "Sanskriti Rijal" 
+email : "rijals@dickinson.edu" 
+date: "2023-12-15"
+---
+# Question a 
+```{r}
+loans <- read.csv("/Users/sanskriti/Desktop/DATA-180-Sanskriti/loan_default_data_set.csv")
+dim(loans)
+```
+This data set has 20000 rows and 21 columns. 
+
+# Question b
+```{r}
+column_names <- names(loans)
+print(column_names)
+```
+# Question c 
+This data set has mostly numeric data except for column 'rep_education' which has ordinal data and 'def_ind' and 'ind_XYZ' which has categorical data.
+
+# Question d
+```{r}
+colnames(loans)[colSums(is.na(loans)) > 0]
+Missing <- colnames(loans)[colSums(is.na(loans)) > 0]
+percent_missing <- (colSums(is.na(loans[, Missing])) / nrow(loans)) * 100
+percent_missing
+```
+# Question e
+Some of the many ways to fix the missing values would be to remove the rows or columns which contains missing data. In this data set, it would be most suitable to remove the few rows that have missing data. However, in case of data sets were there are many rows missing, we could delete the whole column. Another way would be to be to create a new category for missing values. 
+ 
+# Question f
+This data fits the supervised learning model as it has a response variable Def_Ind which is an indicator of default. Likewise, this data also predicts whether the applicant's attributes are derived from information obtained bu bank XYZ at the time of application. As the dats is making predictions and uses a response variable, supervised learning model would be best fit for this data. 
+
+# Question g
+```{r}
+remove_missing <- na.omit(loans)
+dim(remove_missing)
+```
+# Part 2
+# Question a 
+```{r}
+library(dplyr)
+summaryStats <- summary(remove_missing)
+print(summaryStats)
+```
+
+# Question b
+For num_card_inq_24_month since the mean(1.044) is greater than the median (0) , it is skewed to the right. 
+For total_amount_currently_past_due, the mean(354.2) is heavily greater than the median(0). As a result it is also skeewed to the right. 
+For credit_age, since the mean(280.9) and median(281) are close in value , it is approximately bell shaped 
+
+
+# Question c 
+```{r}
+library(ggplot2)
+ggplot(data = remove_missing, aes(x = num_card_inq_24_month)) +
+  geom_histogram(binwidth = 1, fill = "skyblue", color = "black", aes(y = after_stat(density))) +
+  ggtitle("Histogram of num_card_inq_24_month") +
+  xlab("Number of Card Inquiries in the Last 24 Months") +
+  ylab("Density")
+
+ggplot(data = remove_missing, aes(x = tot_amount_currently_past_due)) +
+  geom_histogram(binwidth = 1000, fill = "pink", color = "black", aes(y = after_stat(density))) +
+  ggtitle("Histogram of the total amount currently past due") +
+  xlab("Total amount past due") + ylab("Frequency")
+
+ggplot(data = remove_missing, aes(x = credit_age)) +
+  geom_histogram(binwidth = 10, fill = "lightgreen", color = "black", aes(y = after_stat(density))) +
+  ggtitle("Histogram of credit age") +
+  xlab("Credit Age") + ylab("Frequency")
+```
+
+
+Similar to our calculations before, we can see from these histograms that num_card_inq_24_month and tot_amount_currently_past_due are both skewed to the right and credit_age is bell-shaped. 
+
+
+# Question d 
+One way to convert rep_education into numerical data is by label encoding where you assign a numerical value to each category. Since there are four ordinal categories in rep_education each categoru could get an unique value such as high school = 1, college = 2, graduate = 3, others = 3. Another way is by one-hot enocoding which creates binary columns for each category. 
+
+# Part 3 
+
+
+#Question a 
+```{r}
+library(ggplot2)
+
+ggplot(data = remove_missing, aes(x = factor(Def_ind), fill = factor(Def_ind))) +
+  geom_bar(color = "black",  linewidth=0.5) +
+  scale_fill_manual(values = c("lavender", "pink")) + 
+  ggtitle("Bar Graph of Indicator of Default") +
+  xlab("Default Indicator (0 = No Default, 1 = Default)") +
+  ylab("Count")
+```
+
+The variable Def-ind is an indicator of default with binary value 1 being account defaulted after an account was approved and opened with bank XYZ in the past 18 months while 0 being not defaulted. The x axis shows the binary values 0 and 1, while the y axis shows their count. As we can see from the bar graph, around 15000 people have not defaulted their accounts while only less than 2500 people have defaulted their accounts. 
+
+# Question b 
+```{r}
+library(ggplot2)
+
+ggplot(data = remove_missing, aes(x = rep_education, fill = rep_education)) +
+  geom_bar(color = "black",  linewidth=0.5) +
+  scale_fill_manual(values = c("lightgreen", "pink", "lightblue", "gray")) +
+  ggtitle("Bar Graph of Education Level") +
+  xlab("Education Level") +
+  ylab("Count")
+
+```
+
+This bar graph shows the education levels the applicants in the data set. The x-axis has four categories for education levels which are college, graduate, high school and other. While the y axis gives us the count of people for each level of education. We can see that most people have an education of college degree with a count alightly above 10000. Second highest is a high school degree with a count less than 5000. Third highest is graduate degree with a count less than 2500 and last is other education level with a count of approximately 200.
+
+
+#Question c 
+
+```{r}
+library(ggplot2)
+
+ggplot(data = remove_missing, aes(x = rep_income, fill = factor(rep_income))) +
+  geom_histogram(color = "black", fill = "deeppink", binwidth = 5000) +
+  ggtitle("Histogram of rep_income") +
+  xlab("Income") +
+  ylab("Frequency") +
+  scale_x_continuous(labels = scales::comma_format())
+```
+
+# Question d
+```{r}
+library(ggplot2)
+
+
+ggplot(data = loans, aes(x = tot_balance)) +
+  geom_boxplot(color = "black", fill = "gold", outlier.colour = "red", outlier.shape = 16) +
+  ggtitle("Boxplot of tot_balance") +
+  xlab("Total Balance")
+#Actual 5 number theory for check 
+summary(remove_missing$tot_balance)
+```
+
+APPROXIMATE 5 number summary according to box plot
+
+min- 0
+
+1st Q - 900000
+
+median - 10600
+
+3rd Q - 125000
+
+max- 200000
+
+There are many outliers which we can observe in the boxplot in the color red. 
+
+
