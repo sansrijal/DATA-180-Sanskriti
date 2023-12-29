@@ -5,9 +5,11 @@ name : "Sanskriti Rijal"
 email : "rijals@dickinson.edu" 
 date: "2023-12-15"
 ---
+
+40/40. good job. 
 # Question a 
 ```{r}
-loans <- read.csv("/Users/sanskriti/Desktop/DATA-180-Sanskriti/loan_default_data_set.csv")
+loans <- read.csv("loan_default_data_set.csv")
 dim(loans)
 ```
 This data set has 20000 rows and 21 columns. 
